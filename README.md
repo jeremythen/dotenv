@@ -375,6 +375,37 @@ const myEnv = dotenv.config()
 variableExpansion(myEnv)
 ```
 
+### Built-in value var parsing
+
+To assign to a variable the value of another variable, include the `parseValueVars` boolean value in the `options` while calling `config()`:
+
+In the .env file:
+
+```
+VALUE_VAR_1=Value1
+VALUE_VAR_2=Value2
+VALUE_VAR_3=${VALUE_VAR_1}
+VALUE_VAR_4=${VALUE_VAR_3}
+```
+
+In the js file:
+```js
+config({ parseValueVars: true })
+```
+
+Then in the `process.env`:
+
+```
+{
+//...
+VALUE_VAR_1:Value1
+VALUE_VAR_2:Value2
+VALUE_VAR_3:Value1
+VALUE_VAR_4:Value1
+//..
+}
+```
+
 ### How do I use dotenv with `import`?
 
 Simply..
